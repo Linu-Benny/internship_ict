@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request 
+from flask import Flask, render_template, request
 import pickle
 import numpy as np
 import bz2
@@ -6,13 +6,19 @@ import bz2
 #create flask app
 app = Flask(__name__)
 
-# Load the pickle model
+# Function to decompress and load the pickle model
 def decompress_pickle(file):
     data = bz2.BZ2File(file, 'rb')
     data = pickle.load(data)
     return data
 
-model = decompress_pickle('rf_model.pbz2')
+# Lazy loading the model
+model = None
+
+def load_model():
+    global model
+    if model is None:
+        model = decompress_pickle('rf_model.pbz2')
 
 @app.route('/')
 def home():
@@ -20,6 +26,9 @@ def home():
 
 @app.route('/predict', methods=['POST'])
 def predict():
+    # Load the model
+    load_model()
+
     # Get User input
     Annual_Income = float(request.form['Annual_Income'])
     Interest_Rate = float(request.form['Interest_Rate'])
@@ -43,7 +52,8 @@ def predict():
     Total_Monthly_Expenses = float(request.form['Total_Monthly_Expenses'])
 
     # Make prediction
-    prediction = model.predict([[Annual_Income, Interest_Rate, Num_of_Loan, Delay_from_due_date, Num_of_Delayed_Payment, Changed_Credit_Limit, Num_Credit_Inquiries, Credit_Mix, Outstanding_Debt, Monthly_Balance, Total_Num_Accounts, Total_Monthly_Expenses]])
+    features = np.array([[Annual_Income, Interest_Rate, Num_of_Loan, Delay_from_due_date, Num_of_Delayed_Payment, Changed_Credit_Limit, Num_Credit_Inquiries, Credit_Mix, Outstanding_Debt, Monthly_Balance, Total_Num_Accounts, Total_Monthly_Expenses]])
+    prediction = model.predict(features)
 
     if prediction[0] == 2:
         result = "Credit Score is Standard"
