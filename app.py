@@ -12,9 +12,13 @@ logging.basicConfig(level=logging.INFO)
 
 # Decompress and load the model only when needed
 def decompress_pickle(file):
-    data = bz2.BZ2File(file, 'rb')
-    data = pickle.load(data)
-    return data
+    try:
+        data = bz2.BZ2File(file, 'rb')
+        data = pickle.load(data)
+        return data
+    except Exception as e:
+        logging.error(f"Error loading model: {e}")
+        return None
 
 @app.route('/')
 def home():
@@ -26,6 +30,8 @@ def predict():
     try:
         # Load the model on-demand
         model = decompress_pickle('rf_model.pbz2')
+        if model is None:
+            raise ValueError("Failed to load model")
 
         # Get User input
         Annual_Income = float(request.form['Annual_Income'])
@@ -67,4 +73,5 @@ def predict():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
 
