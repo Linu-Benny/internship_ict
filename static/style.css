@@ -1,0 +1,95 @@
+body { 
+
+    background-image: url("WhatsApp Image 2024-07-30 at 18.45.17.jpeg");
+    /* background-color: black; */
+    font-family: Arial, sans-serif;
+    font-weight:bold;
+    margin: 0; 
+    padding: 0; 
+    background-size: cover;
+} 
+
+
+ h1 { 
+    text-align: center; 
+    color:rgb(215, 16, 215);
+    font-size:260%;
+    margin-bottom: 60px; 
+} 
+
+
+form { 
+    text-align: center;
+    margin-bottom: 20px;
+    
+}  
+
+
+label { 
+    display: inline-block; 
+    margin-bottom: 5px; 
+    color:rgb(210, 45, 100); 
+    font-size:large; 
+} 
+
+
+
+input[type="text"] {
+    width: 20%; 
+    border: 1px solid #ccc; 
+    border-radius: 3px; margin-bottom: 10px; 
+    box-sizing:border-box;
+}  
+
+
+button { 
+    padding: 8px 20px; 
+    background-color: #07edf1; 
+    color: #ffffff; border: none; 
+    border-radius: 3px; 
+    cursor: pointer; 
+    
+} 
+
+
+button:hover { 
+    background-color: #177e03; 
+} 
+
+
+h2 { 
+    margin-top: 20px; 
+    color:rgb(214, 47, 102); 
+    text-align: center; 
+}
+
+
+p{
+font-size:larger;
+color:rgb(225, 41, 103);
+text-align: center;
+font-size:x-large;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    text-align: center;
+    justify-content: center;
+}
+
+.feature-item {
+    display:flex;
+    flex-direction: column;
+}
+
+.feature-item label {
+    margin-bottom: 5px;
+}
+
+.feature-item input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+} 

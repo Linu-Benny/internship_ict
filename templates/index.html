@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/style.css">
+    <title>Credit Score Prediction</title>
+</head>
+<body>
+    <h1>Credit Score Prediction</h1>
+    <form action="/predict" method="POST">
+        <div class="feature-grid">
+            <div class="feature-row">
+                <label for="Annual_Income">Annual Income:</label>
+                <input type="text" id="Annual_Income" name="Annual_Income" min="5000" max="200000" required><br>
+                <label for="Interest_Rate">Interest Rate:</label>
+                <input type="text" id="Interest_Rate" name="Interest_Rate" min="1" max="35" required><br>
+            </div>
+        
+            <div class="feature-row">
+                <label for="Num_of_Loan">Number of Loans:</label>
+                <input type="text" id="Num_of_Loan" name="Num_of_Loan" min="0" max="10" required><br>
+                <label for="Delay_from_due_date">Delay from Due Date:</label>
+                <input type="text" id="Delay_from_due_date" name="Delay_from_due_date" min="0" max="90" required><br>
+            </div>
+        
+            <div class="feature-row">
+                <label for="Num_of_Delayed_Payment">Number of Delayed Payments:</label>
+                <input type="text" id="Num_of_Delayed_Payment" name="Num_of_Delayed_Payment" min="0" max="30" required><br>
+                <label for="Changed_Credit_Limit">Changed Credit Limit:</label>
+                <input type="text" id="Changed_Credit_Limit" name="Changed_Credit_Limit" min="0" max="30" required><br>
+            </div>
+
+            <div class="feature-row">
+                <label for="Num_Credit_Inquiries">Number of Credit Inquiries:</label>
+                <input type="text" id="Num_Credit_Inquiries" name="Num_Credit_Inquiries" min="0" max="20" required><br>
+                <label for="Credit_Mix">Credit Mix (Good, Standard, Bad):</label>
+                <input type="text" id="Credit_Mix" name="Credit_Mix" required><br>
+            </div>
+        
+            <div class="feature-row">
+
+                <label for="Outstanding_Debt">Outstanding Debt:</label>
+                <input type="text" id="Outstanding_Debt" name="Outstanding_Debt" min="0" max="5000" required><br>
+                <label for="Monthly_Balance">Monthly Balance:</label>
+                <input type="text" id="Monthly_Balance" name="Monthly_Balance" min="0" max="2000" required><br>
+            </div>
+
+            <div class="feature-row">
+                <label for="Total_Num_Accounts">Total Number of Accounts:</label>
+                <input type="text" id="Total_Num_Accounts" name="Total_Num_Accounts" min="0" max="25" required><br>
+                <label for="Total_Monthly_Expenses">Total Monthly Expenses:</label>
+                <input type="text" id="Total_Monthly_Expenses" name="Total_Monthly_Expenses" min="0" max="4000" require'd><br>
+            </div>
+
+        </div>
+        <button type="submit">Predict</button>
+        
+    </form>
+
+    {% if pred_res %}
+        <h2>Prediction Result:</h2>
+        <p>{{ pred_res }}</p>
+    {% endif %}
+</body>
+</html>
