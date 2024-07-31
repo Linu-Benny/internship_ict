@@ -39,7 +39,6 @@
             </div>
         
             <div class="feature-row">
-
                 <label for="Outstanding_Debt">Outstanding Debt:</label>
                 <input type="text" id="Outstanding_Debt" name="Outstanding_Debt" min="0" max="5000" required><br>
                 <label for="Monthly_Balance">Monthly Balance:</label>
@@ -50,17 +49,11 @@
                 <label for="Total_Num_Accounts">Total Number of Accounts:</label>
                 <input type="text" id="Total_Num_Accounts" name="Total_Num_Accounts" min="0" max="25" required><br>
                 <label for="Total_Monthly_Expenses">Total Monthly Expenses:</label>
-                <input type="text" id="Total_Monthly_Expenses" name="Total_Monthly_Expenses" min="0" max="4000" require'd><br>
+                <input type="text" id="Total_Monthly_Expenses" name="Total_Monthly_Expenses" min="0" max="4000" required><br>
             </div>
 
         </div>
         <button type="submit">Predict</button>
-        
     </form>
-
-    {% if pred_res %}
-        <h2>Prediction Result:</h2>
-        <p>{{ pred_res }}</p>
-    {% endif %}
 </body>
 </html>
