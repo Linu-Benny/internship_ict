@@ -10,17 +10,11 @@ app = Flask(__name__)
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 
-# Load the pickle model
+# Decompress and load the model only when needed
 def decompress_pickle(file):
     data = bz2.BZ2File(file, 'rb')
     data = pickle.load(data)
     return data
-
-try:
-    model = decompress_pickle('rf_model.pbz2')
-except Exception as e:
-    logging.error(f"Error loading model: {e}")
-    model = None
 
 @app.route('/')
 def home():
@@ -29,10 +23,10 @@ def home():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    if model is None:
-        return "Model not loaded", 500
-
     try:
+        # Load the model on-demand
+        model = decompress_pickle('rf_model.pbz2')
+
         # Get User input
         Annual_Income = float(request.form['Annual_Income'])
         Interest_Rate = float(request.form['Interest_Rate'])
@@ -73,3 +67,4 @@ def predict():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
